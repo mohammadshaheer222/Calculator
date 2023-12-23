@@ -6,17 +6,7 @@ const Body = () => {
   const [result, setResult] = useState("");
   const [equal, setEqual] = useState(false);
 
-  const isOperator = (char) => {
-    return ["+", "-", "*", "/", "%"].includes(char);
-  };
-
   const showValue = (event) => {
-    setEqual(false)
-    const lastChar = value.charAt(value.length - 1);
-    if (isOperator(lastChar) && isOperator(event.target.value)) {
-      return setValue(value.slice(0, -1) + event.target.value);
-    }
-    
     // setValue(value + event.target.value);
     const add = [...value];
     add.push(event.target.value);
@@ -27,13 +17,33 @@ const Body = () => {
     } catch {
       setResult(result);
     }
+    // if (event.target.value === "%") {
+    //   const percentage = parseFloat(value) / 100;
+    //   return setResult(percentage);
+    // }
+    if (value.startsWith("0")) {
+      setValue("");
+      setResult("");
+      setEqual(false)
+      return;
+    }
+   
+    const isOperator = (char) => {
+      return ["+", "-", "*", "/", "%"].includes(char);
+    };
+
+    const lastChar = value.charAt(value.length - 1);
+    if (isOperator(lastChar) && isOperator(event.target.value)) {
+      return setValue(value.slice(0, -1) + event.target.value);
+    }
+    setEqual(false);
   };
   const equalBtn = () => {
     setEqual(true);
   };
 
   const deleteBtn = () => {
-    if(equal===false) {
+    if (equal === false) {
       const del = [...value];
       del.pop();
       setValue(del.join(""));
@@ -44,7 +54,6 @@ const Body = () => {
         setResult(result);
       }
     }
-   
   };
   const clearBtn = () => {
     setValue("");
@@ -53,7 +62,6 @@ const Body = () => {
   return (
     <div className="container">
       <div className="main">
-        {/* <p>CASIO</p> */}
         <Screen display={value} result={result} equals={equal} />
         <div className="body">
           <button onClick={clearBtn}>{value === "" ? "AC" : "CL"} </button>

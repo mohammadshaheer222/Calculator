@@ -5,10 +5,10 @@
     outline: none;
     border: none;
     border-radius: 15px 15px 0px 0px;
-    box-shadow: inset 0px -15px 12px #ecf0f3, inset -2px 3px 12px rgba(0, 0, 0, 0.16);
     text-align: right;
     padding: 10px 15px;
     font-weight: bold;
+    background-color: rgb(228, 228, 228);
   }
 .label-2 {
   width: 80%;
@@ -16,9 +16,9 @@
     outline: none;
     border: none;
     border-radius: 0px 0px 15px 15px;
-    box-shadow: inset -5px 20px 12px #ecf0f3, inset 0px -1px 13px rgba(0, 0, 0, 0.16);
     text-align: right;
     padding: 15px 15px;
     /* font-size: 20px; */
     font-weight: bold;
+    background-color: rgb(228, 228, 228);
 }
