@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Screen from "../Screen/Screen";
 import "./body.css";
 const Body = () => {
@@ -7,8 +7,18 @@ const Body = () => {
   const [equal, setEqual] = useState(false);
 
   const showValue = (event) => {
+    const isOperator = (char) => {
+      return ["+", "-", "*", "/", "%"].includes(char);
+    };
     // setValue(value + event.target.value);
     const add = [...value];
+    console.log(value)
+    if (add.length === 0 && isOperator(event.target.value)) {
+      setValue("0" + event.target.value);
+      setResult(result);
+      return;
+    }
+
     add.push(event.target.value);
     setValue(add.join(""));
     try {
@@ -21,16 +31,6 @@ const Body = () => {
     //   const percentage = parseFloat(value) / 100;
     //   return setResult(percentage);
     // }
-    if (value.startsWith("0")) {
-      setValue("");
-      setResult("");
-      setEqual(false)
-      return;
-    }
-   
-    const isOperator = (char) => {
-      return ["+", "-", "*", "/", "%"].includes(char);
-    };
 
     const lastChar = value.charAt(value.length - 1);
     if (isOperator(lastChar) && isOperator(event.target.value)) {
@@ -55,10 +55,11 @@ const Body = () => {
       }
     }
   };
-  const clearBtn = () => {
-    setValue("");
-    setResult("");
-  };
+    const clearBtn = () => {
+      setValue("");
+      setResult("");
+    };
+  
   return (
     <div className="container">
       <div className="main">
